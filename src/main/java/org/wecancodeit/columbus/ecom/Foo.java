@@ -9,5 +9,11 @@ public class Foo {
 
 	@Resource
 	private String beetlebrox;
+
+	@Override
+	public String toString() {
+		return "Foo [beetlebrox=" + beetlebrox + "]";
+	}
+	
 	
 }
