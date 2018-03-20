@@ -1,12 +1,15 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.springframework.stereotype.Component;
-
-@Component
+@Entity
 public class Product {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
 	
 	@SuppressWarnings("unused")
 	private Product() {
