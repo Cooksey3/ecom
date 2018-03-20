@@ -18,9 +18,9 @@ public class BrowseControllerTest {
 	@Test
 	public void shouldgetProducts() {
 		BrowseController underTest = new BrowseController();
-		
+
 		Collection<Product> result = underTest.getProducts();
-		
+
 		assertThat(result, hasSize(greaterThan(0)));
 	}
 }

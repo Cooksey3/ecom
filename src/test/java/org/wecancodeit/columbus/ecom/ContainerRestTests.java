@@ -26,7 +26,7 @@ public class ContainerRestTests {
 		ResponseEntity<String> response = restTemplate.getForEntity("/products", String.class);
 
 		HttpStatus status = response.getStatusCode();
-		
+
 		assertThat(status, is(HttpStatus.OK));
 	}
 

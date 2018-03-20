@@ -16,13 +16,13 @@ import ch.qos.logback.core.status.Status;
 @RunWith(SpringRunner.class)
 @WebMvcTest
 public class CatalogMvcTest {
-	
+
 	@Resource
 	private MockMvc mvc;
-	
+
 	@Test
 	public void shouldRetrieveProducts() throws Exception {
 		mvc.perform(get("/products")).andExpect(status().isOk());
-		
+
 	}
 }
