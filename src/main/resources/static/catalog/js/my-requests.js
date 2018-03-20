@@ -1,18 +1,17 @@
-console.log("Here is my file!!!");
-
- const xhr = new XMLHttpRequest()
+const xhr = new XMLHttpRequest()
 
  xhr.onreadystatechange = function() {
  	if (xhr.readyState === 4 && xhr.status === 200) {
  		const res = JSON.parse(xhr.responseText)
  		const productsContainer = document.querySelector('#products-container')
- 		console.log("Everything works")
 
- 		for (product in res) {
+ 		for (let product of res) {
  			const productContainer = document.createElement('div')
- 			productContainer.innerText = product.name
-
- 			productsContainer.append(productContainer)
+ 			const productLink = document.createElement('a')
+ 			productLink.setAttribute('href', '/catalog/product.html')
+ 			productLink.innerText = product.name
+ 			productContainer.appendChild(productLink)
+ 			productsContainer.appendChild(productContainer)
  		}
  	}
  }
