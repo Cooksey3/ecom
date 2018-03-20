@@ -7,11 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Product {
-
-	// @Id
-	// @GeneratedValue
-	// private long id;
-	//
+	
+	@SuppressWarnings("unused")
 	private Product() {
 	}
 
