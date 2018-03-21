@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.repository.CrudRepository;
+import org.wecancodeit.columbus.ecom.catalog.BrowseController.ProductNotFoundException;
 
 public class BrowseControllerTest {
 
@@ -61,4 +62,10 @@ public class BrowseControllerTest {
 		assertThat(result, is(product));
 	}
 
+	@Test(expected = ProductNotFoundException.class)
+	public void shouldReturnNotFoundForBadProductId() {
+		long invalidProductId = 42L;
+		underTest.findProduct(invalidProductId);
+	}
+	
 }
