@@ -14,13 +14,13 @@ public class BrowseController {
 	private CrudRepository<Product, Long> productRepo;
 
 	@RequestMapping("/products")
-	public Iterable<Product> getProducts() {
+	public Iterable<Product> findProducts() {
 		return productRepo.findAll();
 	}
 
 	@RequestMapping("/products/{id}")
-	public Product getProduct(@PathVariable long id) {
+	public Product findProduct(@PathVariable long id) {
 
-		return new Product("Product!!!");
+		return productRepo.findOne(id);
 	}
 }

@@ -22,7 +22,7 @@ public class CatalogMvcTest {
 
 	@MockBean
 	private CrudRepository<Product, Long> productRepo;
-	
+
 	@Test
 	public void shouldRetrieveProducts() throws Exception {
 		mvc.perform(get("/products")).andExpect(status().isOk());
