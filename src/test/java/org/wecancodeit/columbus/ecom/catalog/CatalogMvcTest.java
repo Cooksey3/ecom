@@ -1,5 +1,7 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,6 +32,9 @@ public class CatalogMvcTest {
 
 	@Test
 	public void shouldRetrieveIndividualProduct() throws Exception {
+		when(productRepo.findOne(42L)).thenReturn(new Product("Product!!!"));
 		mvc.perform(get("/products/42")).andExpect(status().isOk());
 	}
+	
+	// need to test for 404 (not found), too
 }
