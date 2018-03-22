@@ -3,8 +3,6 @@ package org.wecancodeit.columbus.ecom.catalog;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -55,7 +53,7 @@ public class BrowseControllerTest {
 	@Test
 	public void shouldGetAnIndividualProduct() {
 		long id = 42L;
-		when(productRepo.findOne(42L)).thenReturn(product);
+		when(productRepo.findOne(id)).thenReturn(product);
 
 		Product result = underTest.findProduct(42L);
 
@@ -67,5 +65,5 @@ public class BrowseControllerTest {
 		long invalidProductId = 42L;
 		underTest.findProduct(invalidProductId);
 	}
-	
+
 }
