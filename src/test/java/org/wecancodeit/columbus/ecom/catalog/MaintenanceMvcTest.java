@@ -32,7 +32,7 @@ public class MaintenanceMvcTest {
 
 	@MockBean
 	private CrudRepository<Product, Long> productRepo;
-	
+
 	@Test
 	public void shouldCreateProduct() throws Exception {
 		Product product = new Product("test product");

@@ -1,26 +1,28 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Product {
+public class Cart {
 
 	@Id
 	@GeneratedValue
 	private long id;
-
 	private String name;
 
-	@ManyToMany(mappedBy = "products")
-	private Collection<Cart> cart;
+	@ManyToMany
+	private Collection<Product> products;
 
-	public Collection<Cart> getCart() {
-		return cart;
+	public Collection<Product> getProducts() {
+		return products;
 	}
 
 	public long getId() {
@@ -32,11 +34,16 @@ public class Product {
 	}
 
 	@SuppressWarnings("unused")
-	private Product() {
+	private Cart() {
 	}
 
-	public Product(String name) {
+	public Cart(String name, Product... products) {
 		this.name = name;
+		this.products = new HashSet<>(Arrays.asList(products));
+	}
+
+	public void removeItem(Product product) {
+		 products.remove(product);
 	}
 
 	@Override
@@ -55,14 +62,10 @@ public class Product {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Product other = (Product) obj;
+		Cart other = (Cart) obj;
 		if (id != other.id)
 			return false;
 		return true;
-	}
-
-	public void removeCart(Cart cart) {
-
 	}
 
 }

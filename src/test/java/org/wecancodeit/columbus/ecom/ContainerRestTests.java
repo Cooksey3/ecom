@@ -22,7 +22,7 @@ public class ContainerRestTests {
 
 	@Resource
 	private TestRestTemplate restTemplate;
-	
+
 	@Test
 	public void shouldGetProducts() {
 		ResponseEntity<String> response = restTemplate.getForEntity("/products", String.class);
@@ -31,14 +31,14 @@ public class ContainerRestTests {
 
 		assertThat(status, is(HttpStatus.OK));
 	}
-	
+
 	@Test
 	public void shouldCreateProduct() {
 		Product product = new Product("my new product");
-		
+
 		ResponseEntity<Product> created = restTemplate.postForEntity("/products", product, Product.class);
-		
+
 		assertThat(created.getBody().getId(), is(greaterThan(0L)));
 	}
-	
+
 }

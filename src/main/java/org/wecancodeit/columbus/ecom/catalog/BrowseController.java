@@ -1,5 +1,8 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.annotation.Resource;
 
 import org.springframework.data.repository.CrudRepository;
@@ -15,23 +18,25 @@ public class BrowseController {
 
 	@Resource
 	private CrudRepository<Product, Long> productRepo;
-
+	
 	@RequestMapping(path = "/products", method = RequestMethod.GET)
 	public Iterable<Product> findProducts() {
 		return productRepo.findAll();
 	}
 
 	@RequestMapping("/products/{id}")
-	public Product findProduct(@PathVariable(name = "id") long id) {
+	public Product findProduct(@PathVariable long id) {
 		Product selectedProduct = productRepo.findOne(id);
 		if (selectedProduct != null) {
 			return selectedProduct;
 		}
-
 		throw new ProductNotFoundException();
+		
+		
 	}
-
+	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public class ProductNotFoundException extends RuntimeException {
+		
 	}
 }

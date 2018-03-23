@@ -18,19 +18,19 @@ public class CatalogJpaTest {
 
 	@Resource
 	private CrudRepository<Product, Long> productRepo;
-	
+
 	@Test
 	public void shouldInitializeProductRepository() {
-		
+
 	}
-	
+
 	@Test
-	public void shouldAssignIdWhenProductIsCreated () {
+	public void shouldAssignIdWhenProductIsCreated() {
 		Product product = new Product("my new product");
-		
+
 		product = productRepo.save(product);
-		
+
 		assertThat(product.getId(), is(greaterThan(0L)));
 	}
-	
+
 }
