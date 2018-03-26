@@ -37,8 +37,13 @@ public class Cart {
 		cartItems.clear();
 	}
 
-	// public void removeItem(CartItem cartItemToRemove) {
-	// cartItems.remove(cartItemToRemove);
-	// }
+	public void removeItem(Product product) {
+		for (CartItem item : cartItems) {
+			if (item.isAssociatedWith(product)) {
+				cartItems.remove(item);
+			}
+		}
+//		cartItems.remove(cartItemToRemove);
+	}
 
 }
