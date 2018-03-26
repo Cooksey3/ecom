@@ -25,12 +25,20 @@ public class Cart {
 
 	public BigDecimal getTotalPrice() {
 		BigDecimal total = new BigDecimal("0.00");
-		for (CartItem item: cartItems) {
+		for (CartItem item : cartItems) {
 			BigDecimal quantityAsBd = valueOf(item.getQuantity());
 			BigDecimal itemPrice = item.getUnitPrice().multiply(quantityAsBd);
 			total = total.add(itemPrice);
 		}
 		return total;
 	}
+
+	public void clearCart() {
+		cartItems.clear();
+	}
+
+	// public void removeItem(CartItem cartItemToRemove) {
+	// cartItems.remove(cartItemToRemove);
+	// }
 
 }

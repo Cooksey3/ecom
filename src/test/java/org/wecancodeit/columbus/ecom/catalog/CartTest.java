@@ -48,4 +48,19 @@ public class CartTest {
 		
 		assertThat(underTest.getTotalPrice(), is(new BigDecimal("10.00")));
 	}
+	
+	@Test
+	public void shouldClearCart() {
+		Cart underTest = new Cart();
+		
+		Product carrots = new Product("4.50");
+		Product gum = new Product("1.00");
+		underTest.addProduct(carrots, 2);
+		underTest.addProduct(gum, 1);
+		
+		underTest.clearCart();
+		
+		assertThat(underTest.contains(carrots), is(false));
+	}
+	
 }
