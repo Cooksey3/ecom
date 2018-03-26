@@ -77,5 +77,16 @@ public class CartTest {
 		assertThat(underTest.contains(carrots), is(false));
 		assertThat(underTest.contains(gum), is(true));
 	}
-
+	
+	@Test
+	public void shouldRemoveCertainQuantityOfSpecifiedItem() {
+		Cart underTest = new Cart();
+		
+		Product carrots = new Product("4.50");
+		underTest.addProduct(carrots, 2);
+		
+		underTest.removeSpecifiedQuantityOfItems(carrots, 1);
+		
+		assertThat(underTest.getTotalPrice(), is(new BigDecimal("4.50")));
+	}
 }

@@ -43,7 +43,16 @@ public class Cart {
 				cartItems.remove(item);
 			}
 		}
-//		cartItems.remove(cartItemToRemove);
+	}
+
+	public void removeSpecifiedQuantityOfItems(Product product, int quantity) {
+		for (CartItem item : cartItems) {
+			if (item.isAssociatedWith(product)) {
+				int newQuantity = item.getQuantity() - quantity;
+				cartItems.remove(item);
+				addProduct(product, newQuantity);
+			}
+		}
 	}
 
 }
