@@ -2,7 +2,7 @@ package org.wecancodeit.columbus.ecom.catalog;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
@@ -18,44 +18,89 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DataJpaTest
 public class ProductMappingTest {
 
-	@Resource
-	private ProductRepository productRepo;
-	
-	@Resource
-	private CartRepository cartRepo;
-	
-	@Resource
-	private TestEntityManager entityManager;
+//	@Resource
+//	private CartItemRepository cartItemRepo;
+//
+//	@Resource
+//	private CartRepository cartRepo;
+//	
+//	@Resource
+//	private ProductRepository productRepo;
+//
+//	@Resource
+//	private TestEntityManager entityManager;
+//
+//	@Test
+//	public void shouldSaveCartToCartItemRelationship() {
+//		Cart cart = new Cart("go");
+//		cart = cartRepo.save(cart);
+//		long cartId = cart.getId();
+//
+//		Product dillPickles = productRepo.save(new Product("Dill Pickles", 0));
+//		Product handBags = productRepo.save(new Product("Gucci", 0));
+//		CartItem dillPicklesItem = cartItemRepo.save(new CartItem(dillPickles, cart));
+//		CartItem handBagsItem = cartItemRepo.save(new CartItem(handBags, cart));
+//		
+//		entityManager.flush();
+//		entityManager.clear();
+//
+//		cart = cartRepo.findOne(cartId);
+//		assertThat(cart.getCartItems(), containsInAnyOrder(dillPicklesItem, handBagsItem));
+//	}
+//
+//	@Test
+//	public void shouldAddItemToCart() {
+//		Cart cart = cartRepo.save(new Cart("go"));
+//		Product dillPickles = productRepo.save(new Product("Dill Pickles", 0));
+//		Product handBags = productRepo.save(new Product("Gucci", 0));
+//		CartItem dillPicklesItem = cartItemRepo.save(new CartItem(dillPickles, cart));
+//		CartItem handBagsItem = cartItemRepo.save(new CartItem(handBags, cart));
+//
+//		cart.addItem(handBagsItem);
+//		cart.addItem(dillPicklesItem);
+//
+//		assertThat(cart.getCartItems(), containsInAnyOrder(dillPicklesItem, handBagsItem));
+//	}
+//
+//	@Test
+//	public void shouldClearCart() {
+//		Cart cart = cartRepo.save(new Cart("go"));
+//		Product dillPickles = productRepo.save(new Product("Dill Pickles"));
+//		Product handBags = productRepo.save(new Product("Gucci"));
+//		CartItem dillPicklesItem = cartItemRepo.save(new CartItem(dillPickles, cart));
+//		CartItem handBagsItem = cartItemRepo.save(new CartItem(handBags, cart));
+//
+//		cart.addItem(handBagsItem);
+//		cart.addItem(dillPicklesItem);
+//
+//		cart.clearCart();
+//
+//		assertThat(cart.getCartItems(), not(contains(handBags)));
+//		assertThat(cart.getCartItems(), not(contains(dillPickles)));
+//		assertThat(cartItemRepo.findAll(), not(contains(dillPickles)));
+//	}
+//
+//	@Test
+//	public void shouldRemoveItemFromCart() {
+//		Cart cart = cartRepo.save(new Cart("go"));
+//		Product dillPickles = productRepo.save(new Product("Dill Pickles", 0));
+//		Product handBags = productRepo.save(new Product("Gucci", 0));
+//		Product socks = productRepo.save(new Product("Socks", 0));
+//		CartItem dillPicklesItem = cartItemRepo.save(new CartItem(dillPickles, cart));
+//		CartItem handBagsItem = cartItemRepo.save(new CartItem(handBags, cart));
+//		CartItem socksItem = cartItemRepo.save(new CartItem(socks, cart));
+//
+//		long cartId = cart.getId();
+//
+//		cart.removeItem(dillPicklesItem);
+//
+//		entityManager.flush();
+//		entityManager.clear();
+//
+//		cart = cartRepo.findOne(cartId);
+//
+//		assertThat(cart.getCartItems(), contains(handBagsItem, socksItem));
+//		assertThat(cartItemRepo.findAll(), not(contains(dillPicklesItem)));
+//	}
 
-	@Test
-	public void cartShouldHaveMultipleItems() {
-		Product dillPickles = productRepo.save(new Product("Dill Pickles"));
-		Product handBags = productRepo.save(new Product("Gucci"));
-
-		Cart cart = new Cart("go", dillPickles, handBags);
-		cartRepo.save(cart);
-
-		assertThat(cart.getProducts(), containsInAnyOrder(dillPickles, handBags));
-	}
-	
-	@Test
-	public void shouldRemoveItemFromCart() {
-		Product dillPickles = productRepo.save(new Product("Dill Pickles"));
-		Product handBags = productRepo.save(new Product("Gucci"));
-		Cart cart = cartRepo.save(new Cart("go", dillPickles, handBags));
-
-		cart.removeItem(dillPickles);
-		entityManager.flush();
-		entityManager.clear();
-
-		assertThat(cart.getProducts(), not(contains(dillPickles)));
-		assertThat(cart.getProducts(), contains(handBags));
-		
-	}
-	
-	
-	
-	
-	
-	
 }

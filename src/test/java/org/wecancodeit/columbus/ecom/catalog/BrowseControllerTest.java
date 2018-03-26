@@ -28,12 +28,12 @@ public class BrowseControllerTest {
 	private Product product;
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void shouldGetProducts() {
+	public void shouldFindProducts() {
 		when(productRepo.findAll()).thenReturn(Collections.singleton(product));
 
 		Iterable<Product> result = underTest.findProducts();
@@ -42,28 +42,26 @@ public class BrowseControllerTest {
 	}
 
 	@Test
-	public void shouldGetProductsFromDb() {
-		when(productRepo.findAll()).thenReturn(Collections.singleton(product));
-
-		Iterable<Product> result = underTest.findProducts();
-
-		assertThat(result, contains(product));
-	}
-
-	@Test
-	public void shouldGetAnIndividualProduct() {
+	public void shouldRetrieveAnIndividualProduct() {
 		long id = 42L;
 		when(productRepo.findOne(id)).thenReturn(product);
-
-		Product result = underTest.findProduct(42L);
+		Product result = underTest.findProduct(id);
 
 		assertThat(result, is(product));
 	}
 
 	@Test(expected = ProductNotFoundException.class)
 	public void shouldReturnNotFoundForBadProductId() {
-		long invalidProductId = 42L;
-		underTest.findProduct(invalidProductId);
+		underTest.findProduct(42L);
+	}
+
+	@Test
+	public void shouldRetrieveProductsFromDb() {
+		when(productRepo.findAll()).thenReturn(Collections.singleton(product));
+
+		Iterable<Product> result = underTest.findProducts();
+
+		assertThat(result, contains(product));
 	}
 
 }

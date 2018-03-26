@@ -13,32 +13,34 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(BrowseController.class)
+@WebMvcTest 
 public class BrowseMvcTest {
-
-	@Resource
+	
+	@Resource 
 	private MockMvc mvc;
-
+	
 	@MockBean
 	private CrudRepository<Product, Long> productRepo;
-
+	
 	@Test
-	public void shouldRetrieveProducts() throws Exception {
-		mvc.perform(get("/products")).andExpect(status().isOk());
+	public void shouldRetreiveProducts () throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(status().isOk());
 	}
-
+	
 	@Test
-	public void shouldRetrieveIndividualProduct() throws Exception {
-		when(productRepo.findOne(42L)).thenReturn(new Product("Product!!!"));
+	public void shouldRetrieveAnIndividualProduct() throws Exception {
+		when(productRepo.findOne(42L)).thenReturn(new Product("some product", 0));
 		mvc.perform(get("/products/42")).andExpect(status().isOk());
+		
+		
 	}
-
+	
 	@Test
 	public void shouldNotFindProductId() throws Exception {
 		mvc.perform(get("/products/42")).andExpect(status().isNotFound());
 	}
-
-	// need to test for 404 (not found), too
 }

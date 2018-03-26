@@ -4,7 +4,6 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.annotation.Resource;
@@ -17,6 +16,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,21 +36,19 @@ public class MaintenanceMvcTest {
 
 	@Test
 	public void shouldCreateProduct() throws Exception {
-		Product product = new Product("test product");
+		Product product = new Product("test product", 0);
 		String productJson = jsonMapper.writeValueAsString(product);
-		mvc.perform(post("/products").content(productJson)).andExpect(status().isOk());
+		mvc.perform(MockMvcRequestBuilders.post("/products").content(productJson)).andExpect(status().isOk());
 	}
 
 	@Test
-	public void shouldCreateProductWithName() throws Exception {
-		when(productRepo.save(any(Product.class))).thenReturn(new Product("response product name"));
-
-		Product product = new Product("test product");
+	public void shouldCreateProductAsExpected() throws Exception {
+		Product product = new Product("test product", 0);
+		when(productRepo.save(any(Product.class))).thenReturn(new Product("response product name", 0));
 		String productJson = jsonMapper.writeValueAsString(product);
 
-		// content is the request body
 		MockHttpServletRequestBuilder request = post("/products").content(productJson);
-		mvc.perform(request).andExpect(jsonPath("@.name", is("response product name")));
+		mvc.perform(request).andExpect(MockMvcResultMatchers.jsonPath("@.name", is("response product name")));
 	}
 
 }

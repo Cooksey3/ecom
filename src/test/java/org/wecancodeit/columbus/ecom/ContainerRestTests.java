@@ -34,7 +34,7 @@ public class ContainerRestTests {
 
 	@Test
 	public void shouldCreateProduct() {
-		Product product = new Product("my new product");
+		Product product = new Product("my new product", 0);
 
 		ResponseEntity<Product> created = restTemplate.postForEntity("/products", product, Product.class);
 

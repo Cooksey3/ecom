@@ -1,10 +1,11 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 
 import javax.annotation.Resource;
 
-import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
@@ -21,19 +22,19 @@ public class CatalogJsonTest {
 
 	@Test
 	public void shouldSerialize() throws IOException {
-		Product product = new Product("Product!!!");
+		Product product = new Product("product name", 0);
 
 		JsonContent<Product> content = productJson.write(product);
 
-		assertThat(content).extractingJsonPathValue("@.name").isEqualTo("Product!!!");
+		assertThat(content).extractingJsonPathValue("@.name").isEqualTo("product name");
 	}
 
 	@Test
 	public void shouldDeserialize() throws IOException {
-		String JsonContent = "{ \"name\": \"Product!!!\" }";
-		
-		Product parsed = productJson.parseObject(JsonContent);
-		
-		assertThat(parsed.getName()).isEqualTo("Product!!!");
+		String expectedJson = "{ \"name\": \"product name\" }";
+
+		Product parsed = productJson.parseObject(expectedJson);
+
+		assertThat(parsed.getName()).isEqualTo("product name");
 	}
 }

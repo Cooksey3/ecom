@@ -1,71 +1,36 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
-import java.util.Arrays;
+import static java.math.BigDecimal.valueOf;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-@Entity
 public class Cart {
 
-	@Id
-	@GeneratedValue
-	private long id;
-	private String name;
+	private Collection<CartItem> cartItems = new ArrayList<>();
 
-	@ManyToMany
-	private Collection<Product> products;
-
-	public Collection<Product> getProducts() {
-		return products;
+	public void addProduct(Product toAdd, int quantity) {
+		cartItems.add(new CartItem(toAdd, quantity));
 	}
 
-	public long getId() {
-		return id;
+	public boolean contains(Product product) {
+		for (CartItem item : cartItems) {
+			if (item.isAssociatedWith(product)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	@SuppressWarnings("unused")
-	private Cart() {
-	}
-
-	public Cart(String name, Product... products) {
-		this.name = name;
-		this.products = new HashSet<>(Arrays.asList(products));
-	}
-
-	public void removeItem(Product product) {
-		 products.remove(product);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cart other = (Cart) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public BigDecimal getTotalPrice() {
+		BigDecimal total = new BigDecimal("0.00");
+		for (CartItem item: cartItems) {
+			BigDecimal quantityAsBd = valueOf(item.getQuantity());
+			BigDecimal itemPrice = item.getUnitPrice().multiply(quantityAsBd);
+			total = total.add(itemPrice);
+		}
+		return total;
 	}
 
 }

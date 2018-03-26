@@ -21,12 +21,11 @@ public class CatalogJpaTest {
 
 	@Test
 	public void shouldInitializeProductRepository() {
-
 	}
 
 	@Test
 	public void shouldAssignIdWhenProductIsCreated() {
-		Product product = new Product("my new product");
+		Product product = new Product("my new product", 0);
 
 		product = productRepo.save(product);
 
