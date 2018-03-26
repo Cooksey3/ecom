@@ -18,7 +18,7 @@ public class CartItem {
 	public BigDecimal getUnitPrice() {
 		return product.getPrice();
 	}
-	
+
 	public boolean isAssociatedWith(Product product) {
 		return getProduct().equals(product);
 	}

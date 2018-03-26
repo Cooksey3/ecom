@@ -77,16 +77,29 @@ public class CartTest {
 		assertThat(underTest.contains(carrots), is(false));
 		assertThat(underTest.contains(gum), is(true));
 	}
-	
+
 	@Test
 	public void shouldRemoveCertainQuantityOfSpecifiedItem() {
 		Cart underTest = new Cart();
-		
 		Product carrots = new Product("4.50");
 		underTest.addProduct(carrots, 2);
-		
+
 		underTest.removeSpecifiedQuantityOfItems(carrots, 1);
-		
+
 		assertThat(underTest.getTotalPrice(), is(new BigDecimal("4.50")));
+	}
+
+	@Test
+	public void shouldRemoveCertainQuantityOfSpecifiedItems() {
+		Cart underTest = new Cart();
+		Product carrots = new Product("1.00");
+		underTest.addProduct(carrots, 2);
+		Product gum = new Product("1.00");
+		underTest.addProduct(gum, 2);
+
+		// underTest.removeSpecifiedQuantityOfItems(carrots, 1);
+		underTest.removeSpecifiedQuantityOfItems(gum, 1);
+
+		assertThat(underTest.getTotalPrice(), is(new BigDecimal("2.00")));
 	}
 }
