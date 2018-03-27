@@ -93,11 +93,11 @@ public class CartTest {
 	public void shouldRemoveCertainQuantityOfSpecifiedItems() {
 		Cart underTest = new Cart();
 		Product carrots = new Product("1.00");
-		underTest.addProduct(carrots, 2);
 		Product gum = new Product("1.00");
+		underTest.addProduct(carrots, 2);
 		underTest.addProduct(gum, 2);
 
-		// underTest.removeSpecifiedQuantityOfItems(carrots, 1);
+		underTest.removeSpecifiedQuantityOfItems(carrots, 1);
 		underTest.removeSpecifiedQuantityOfItems(gum, 1);
 
 		assertThat(underTest.getTotalPrice(), is(new BigDecimal("2.00")));

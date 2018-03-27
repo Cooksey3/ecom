@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class Cart {
 
-	private Collection<CartItem> cartItems = new ArrayList<>();
+	private ArrayList<CartItem> cartItems = new ArrayList<>();
 
 	public void addProduct(Product toAdd, int quantity) {
 		cartItems.add(new CartItem(toAdd, quantity));
@@ -46,7 +46,8 @@ public class Cart {
 	}
 
 	public void removeSpecifiedQuantityOfItems(Product product, int quantity) {
-		for (CartItem item : cartItems) {
+		for (int i = cartItems.size(); i > 0; i--) {
+			CartItem item = cartItems.get(i - 1);
 			if (item.isAssociatedWith(product)) {
 				int newQuantity = item.getQuantity() - quantity;
 				cartItems.remove(item);
