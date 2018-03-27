@@ -1,16 +1,40 @@
 package org.wecancodeit.columbus.ecom.catalog;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+import java.math.BigDecimal;
+
+import org.junit.Test;
+
+//@RunWith(SpringRunner.class)
+//@DataJpaTest
 public class ProductTest {
 	
 	@Test
+	public void productShouldHavePrice() {
+		Product product = new Product("Shoes", "14.5");
+		
+		BigDecimal price = product.getPrice();
+		
+		assertThat(price, is(new BigDecimal("14.5")));
+	}
+
+	@Test
+	public void productShouldHaveProductName() {
+		Product product = new Product("Shoes", "14.5");
+		
+		String name = product.getItemName();
+		
+		assertThat(name, is("Shoes"));
+	}
+	
+	@Test
 	public void productShouldHavePriceAndQuantity() {
-		Product product = new Product("Shoes", 14.5);
+		Product product = new Product("Bikes", "14.5");
+		
+		String name = product.getItemName();
+		
+		assertThat(name, is("Bikes"));
 	}
 }
